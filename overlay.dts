@@ -1,0 +1,21 @@
+/ {
+	model = "STM32 Minimum Development Board (Blue)";
+	compatible = "st,stm32_min_dev_blue", "st,stm32f103c8";
+	chosen {
+		zephyr,console = &usart1;
+	};
+
+	leds {
+		led: led {
+			gpios = <&gpioc 13 GPIO_ACTIVE_LOW>, <&gpiob 12 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+
+	bt_serial: bt-serial {
+		compatible = "zs-040,hc-05";
+		uart = <&usart3>;
+		state-pin = <&usart3_cts_pb13>;
+		en-pin = <&usart3_rts_pb14>;
+	};
+};

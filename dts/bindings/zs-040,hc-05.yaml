@@ -1,0 +1,25 @@
+# A high level description of the device the binding applies to:
+description: |
+   This is a device driver for the zs-040 hc-05 serial bluetooth modules
+
+# Used to match nodes to this binding as discussed above:
+compatible: "zs-040,hc-05"
+
+properties:
+  state-pin:
+    type: phandles
+    required: true
+    description: State Pin
+  uart:
+    type: phandle
+    required: true
+    description: GPIO pin configurations. We expect
+        that the phandles will reference pinctrl nodes.
+  en-pin:
+    type: phandles
+    required: true
+    description: GPIO pin configurations. We expect
+        that the phandles will reference pinctrl nodes.
+  
+  # Requirements for and descriptions of the properties that this
+  # binding's nodes need to satisfy go here.

@@ -1,0 +1,5 @@
+# Copyright (c) 2019 Nordic Semiconductor
+# SPDX-License-Identifier: Apache-2.0
+
+config ZS_040_DRIVER
+	bool "Enable support for ZS-040 BT Moduler"
