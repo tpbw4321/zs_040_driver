@@ -9,8 +9,7 @@ list(APPEND ZEPHYR_EXTRA_MODULES
 cmake_minimum_required(VERSION 3.13.1)
 
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
-project(out_of_tree_driver)
-zephyr_include_directories(./zs_040_module/zephyr)
+project(zs_040_driver)
 target_sources(app PRIVATE
   src/main.c
   )
