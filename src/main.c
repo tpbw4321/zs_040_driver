@@ -10,28 +10,30 @@
 #include <device.h>
 #include <string.h>
 
-const struct device *dev;
+int process_command(const struct device *dev, uint8_t * data, size_t len) {
+	const struct zs_040_driver_api * zs_040_api = dev->api;
+	struct zs_040_data_s *zs_040_data = dev->data;
+	char *reply = "CMD_OK\r\n";
+
+	if (ZS_040_CONNECTED_STATE == zs_040_data->state) {
+		zs_040_api->send_at_command(dev, reply, strlen(reply));
+	}
+
+	return 0;
+}
 
 void main(void)
 {
-
+	const struct device *dev = device_get_binding("zs_040");
 	const struct zs_040_driver_api * zs_040_api;
-	struct zs_040_data *data;
-
-	char *command = "AT+VERSION\r\n";
-	char *command2 = "AT+NAME\r\n";
-
-	dev = device_get_binding("zs_040");
 	
 	zs_040_api = dev->api;
-	data = dev->data;
 
 	if (!dev) {
 		printk("Could not find zs_040 device\r\n");
 	}
 
-	zs_040_api->send_at_command(dev, command, strlen(command));
-	zs_040_api->send_at_command(dev, command2, strlen(command2));
+	zs_040_api->set_data_recv_cb(dev, process_command);
 
 	while (1) {
 		k_sleep(K_MSEC(1));
